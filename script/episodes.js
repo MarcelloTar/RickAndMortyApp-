@@ -1,19 +1,19 @@
 const baseUrl = 'https://rickandmortyapi.com/api/episode';
 const container = document.querySelector('.cardBox')
 
-function getCharacters() {
+function getEpisodes(page, name, episodes) {
     
-    fetch(baseUrl)
+    fetch(`${baseUrl}/?page=${page}&name=${name}&episode=${episodes}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
             
             renderCards(data.results)
-            // renderPagination(data.info)
+            renderPagination(data.info)
     });
     
     }
-    getCharacters()
+    getEpisodes(1, '', '')
 
 function renderCards(data) {
         container.innerHTML = ''
@@ -31,28 +31,68 @@ function renderCards(data) {
         });
 }
 
-function renderPagination(info) {
-    const paginationBox = document.querySelector('.paginationBox');
-    paginationBox.innerHTML = `
-    <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-    </nav>
-    `
+let currentPage = 1;
+function renderPagination(info){
+   
+  const paginationBox = document.querySelector('.pagination');
+  paginationBox.innerHTML = '';
+  paginationBox.innerHTML += `
+     <li class="page-item prevPage">
+        <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        </a>
+     </li>
+  `;
+  paginationBox.innerHTML += `
+  <li class="page-item"><a class="page-link" href="#">${currentPage}</a></li>
+   `;
+
+  paginationBox.innerHTML += `
+     <li class="page-item nextPage">
+        <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        </a>
+     </li>
+  `;
+  const prevPage = document.querySelector('.prevPage');
+  const nextPage = document.querySelector('.nextPage');
+
+  nextPage.addEventListener('click', () => {
+     currentPage++;
+
+     console.log('next page');
+
+     getEpisodes(currentPage, '', '');
+     
+  })
+  prevPage.addEventListener('click', () => {
+     console.log('previous page');
+     if(currentPage > 1){
+        currentPage--;
+        getEpisodes(currentPage, '', '');
+     }
+     
+
+  })
 }
+
+const btnfilter = document.querySelector('.btnfilter');
+
+btnfilter.addEventListener('click', function(){
+  const name = document.querySelector('.inputName').value;
+  const episodes = document.querySelector('.inputEpisodes').value;
+  currentPage = 1;
+  if(name === ''){
+    getEpisodes(currentPage, '', episodes)
+  } else if(episodes === ''){
+    getEpisodes(currentPage, name, '')
+  } else{
+    getEpisodes(currentPage, name, episodes)
+   }
+
+   
+  
+})
 
 
 
