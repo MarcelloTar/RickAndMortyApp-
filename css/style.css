@@ -1,0 +1,27 @@
+body{
+    font-family: "Exo", serif;
+    font-weight: 500;
+}
+main{
+    /* background: url('/img/125881-1920x1080-desktop-full-hd-rick-and-morty-wallpaper.jpg')  no-repeat;
+    height: 94.2vh; */
+}
+.navbar-expand-lg, .navbar, .bg-body-tertiary{
+    
+    padding: 0;
+}
+.container-fluid{
+    background-color: rgb(31, 31, 31);
+    padding: 5px 0;
+}
+.navbar-brand{
+    font-size: 23px;
+    color: rgba(21, 250, 0, 0.774);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+    transition: color 0.2s;
+}
+.nav-link{
+    font-size: 17px;
+    color: rgb(6, 218, 6);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+}

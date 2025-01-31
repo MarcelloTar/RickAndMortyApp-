@@ -1,3 +1,81 @@
+body{
+    font-family: "Exo", serif;
+    font-weight: 500;
+}
+.navbar-expand-lg, .navbar, .bg-body-tertiary{    
+    padding: 0;
+}
+.container-fluid{
+    background-color: rgb(27, 26, 26);
+
+    padding: 5px 0;
+}
+.navbar-brand{
+    font-size: 23px;
+    color: rgba(21, 250, 0, 0.774);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+    transition: color 0.2s;
+}
+.nav-link{
+    font-size: 17px;
+    color: rgb(6, 218, 6);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+}
+main{
+    /* background-color: rgba(10, 10, 10, 0.884); */
+    background: linear-gradient(180deg, rgba(37,37,37,1) 83%, rgba(28,152,13,1) 100%);
+}
+.card{
+    /* background-color: rgb(29, 29, 29); */
+    background-color: rgb(27, 26, 26);
+    color: rgba(21, 250, 0, 0.774);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+}
+.btn-green{
+    background-color: rgb(10, 170, 18);
+}
+.btn-green:hover{
+    background-color: rgb(7, 134, 14);
+    color: black;
+}
+.Filters{
+    color: rgba(21, 250, 0, 0.774);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+}
+.pagination a{
+    background-color: #2c2c2c;
+    border-color: #2c2c2c;
+    color: #1db11d;
+}
+.pagination span{
+   color: #1db11d;
+
+}
+.pagination a:hover{
+    background-color: #202020;
+    border-color: #202020;
+    color: #299729;
+}
+.disabled a{
+    background-color: #161616 !important;
+    border-color: #161616 !important;
+}
+.form-control, .form-control::placeholder{
+    background-color: rgb(27, 26, 26) !important;
+    border: none;
+    color: #299729;
+}
+.form-control:focus{
+    color: #299729;
+    border: 1px solid #1db11d;
+    box-shadow: 1px 1px 10px #1db11d;
+}
+
+
+
+
+
+
 .form-control{
     width: 300px;
 }

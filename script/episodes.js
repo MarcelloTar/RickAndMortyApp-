@@ -24,11 +24,13 @@ function renderCards(data) {
                     <h5 class="card-title">${cardData.name}</h5>
                     <p class="card-text">Episode: ${cardData.episode}</p>
                     <p class="card-text">release date: ${cardData.air_date}</p>
+                    <button type="button" class="btn btn-green" data-bs-toggle="modal" data-bs-target="#exampleModal" data-name="${cardData.name}" data-episode="${cardData.episode}" id="btnAdd">Add</button>
                 </div>
             </div>
             `
             
         });
+        addToWatchList()
 }
 
 let currentPage = 1;
@@ -87,12 +89,31 @@ btnfilter.addEventListener('click', function(){
   } else if(episodes === ''){
     getEpisodes(currentPage, name, '')
   } else{
-    getEpisodes(currentPage, name, episodes)
-   }
+     getEpisodes(currentPage, name, episodes)
+}
 
    
   
 })
+
+function addToWatchList() {
+         const btnAdds = document.querySelectorAll('#btnAdd');
+         console.log(btnAdds);
+         btnAdds.forEach(btnAdds => {
+            btnAdds.addEventListener('click', function(){
+               const name = btnAdds.getAttribute('data-name');
+               const episode = btnAdds.getAttribute('data-episode')
+               console.log(name);
+               const object = {
+                  name: name,
+                  episode: episode,
+                  watched: false,
+               }
+               localStorage.setItem('name', JSON.stringify(object))
+               
+            })
+         })
+}
 
 
 

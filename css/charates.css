@@ -2,6 +2,7 @@ body{
     font-family: "Exo", serif;
     font-weight: 500;
 }
+
 .navbar-expand-lg, .navbar, .bg-body-tertiary{    
     padding: 0;
 }
@@ -42,6 +43,32 @@ main{
     color: rgba(21, 250, 0, 0.774);
     text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
 }
+
+.details{
+    width: max-content;
+} 
+summary{
+    width: max-content;
+}
+.details p{
+    width: 220px;
+}
+.form-select{
+    background-color: rgb(27, 26, 26);
+    color: rgba(21, 250, 0, 0.774);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+    border-color: #1b1b1b;
+}
+label{
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(21, 250, 0, 0.774) !important;
+    /* text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49); */
+}
+label::after{
+    content: '';
+    background-color: rgba(0, 0, 0, 0) !important;
+
+}
 .pagination a{
     background-color: #2c2c2c;
     border-color: #2c2c2c;
@@ -51,6 +78,7 @@ main{
    color: #1db11d;
 
 }
+
 .pagination a:hover{
     background-color: #202020;
     border-color: #202020;
@@ -60,18 +88,15 @@ main{
     background-color: #161616 !important;
     border-color: #161616 !important;
 }
-.form-control, .form-control::placeholder{
-    background-color: rgb(27, 26, 26) !important;
-    border: none;
-    color: #299729;
+.modal-content{
+    color: rgba(21, 250, 0, 0.774);
+    text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
+    background-color: #1b1b1b;
 }
-.form-control:focus{
-    color: #299729;
-    border: 1px solid #1db11d;
-    box-shadow: 1px 1px 10px #1db11d;
+.modal-header{
+    border-bottom-color: rgba(21, 250, 0, 0.774);
+
 }
-
-
-.form-control{
-    width: 300px;
+.modal-footer{
+    border-top-color: rgba(21, 250, 0, 0.774);
 }
