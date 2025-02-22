@@ -1,6 +1,10 @@
 const baseUrl = 'https://rickandmortyapi.com/api/episode';
 const container = document.querySelector('.cardBox')
 
+let currentPage = 1;
+let currentName = '';
+let currentEpisodes = '';
+
 function getEpisodes(page, name, episodes) {
     
     fetch(`${baseUrl}/?page=${page}&name=${name}&episode=${episodes}`)
@@ -13,7 +17,7 @@ function getEpisodes(page, name, episodes) {
     });
     
     }
-    getEpisodes(1, '', '')
+    getEpisodes(currentPage, currentName, currentEpisodes)
 
 function renderCards(data) {
         container.innerHTML = ''
@@ -24,7 +28,7 @@ function renderCards(data) {
                     <h5 class="card-title">${cardData.name}</h5>
                     <p class="card-text">Episode: ${cardData.episode}</p>
                     <p class="card-text">release date: ${cardData.air_date}</p>
-                    <button type="button" class="btn btn-green" data-bs-toggle="modal" data-bs-target="#exampleModal" data-name="${cardData.name}" data-episode="${cardData.episode}" id="btnAdd">Add</button>
+                    <button type="button" class="btn btn-green btnAdd" data-bs-toggle="modal" data-bs-target="#exampleModal" data-name="${cardData.name}" data-episode="${cardData.episode}" >Add</button>
                 </div>
             </div>
             `
@@ -33,7 +37,6 @@ function renderCards(data) {
         addToWatchList()
 }
 
-let currentPage = 1;
 function renderPagination(info){
    
   const paginationBox = document.querySelector('.pagination');
@@ -59,23 +62,32 @@ function renderPagination(info){
   const prevPage = document.querySelector('.prevPage');
   const nextPage = document.querySelector('.nextPage');
 
-  nextPage.addEventListener('click', () => {
-     currentPage++;
+  if(info.next == null){
+      nextPage.classList.add('disabled')
+   } else {
+      nextPage.addEventListener('click', () => {
+      currentPage++;
 
-     console.log('next page');
+      console.log('next page');
 
-     getEpisodes(currentPage, '', '');
-     
-  })
-  prevPage.addEventListener('click', () => {
-     console.log('previous page');
-     if(currentPage > 1){
-        currentPage--;
-        getEpisodes(currentPage, '', '');
-     }
-     
+      getEpisodes(currentPage, currentName, currentEpisodes);
+   
+      })
+   }
+if(info.prev == null){
+   prevPage.classList.add('disabled')
+} else{
+   prevPage.addEventListener('click', () => {
+      currentPage--;
+      getEpisodes(currentPage, currentName, currentEpisodes)
+   })
+}
 
-  })
+
+
+
+
+  
 }
 
 const btnfilter = document.querySelector('.btnfilter');
@@ -83,33 +95,37 @@ const btnfilter = document.querySelector('.btnfilter');
 btnfilter.addEventListener('click', function(){
   const name = document.querySelector('.inputName').value;
   const episodes = document.querySelector('.inputEpisodes').value;
-  currentPage = 1;
-  if(name === ''){
-    getEpisodes(currentPage, '', episodes)
-  } else if(episodes === ''){
-    getEpisodes(currentPage, name, '')
-  } else{
-     getEpisodes(currentPage, name, episodes)
-}
+  currentName = name;
+  currentEpisodes = episodes
 
-   
+  getEpisodes(currentPage, currentName, currentEpisodes)
   
 })
 
 function addToWatchList() {
-         const btnAdds = document.querySelectorAll('#btnAdd');
+         const btnAdds = document.querySelectorAll('.btnAdd');
          console.log(btnAdds);
          btnAdds.forEach(btnAdds => {
             btnAdds.addEventListener('click', function(){
                const name = btnAdds.getAttribute('data-name');
                const episode = btnAdds.getAttribute('data-episode')
                console.log(name);
-               const object = {
-                  name: name,
-                  episode: episode,
-                  watched: false,
+
+               let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+               const episodeOBj = {
+                     name: name,
+                     episode: episode,
+                     watched: false,
+                     addDate: new Date().toISOString()
+                  };
+
+               const isAlreadyAdded = watchlist.some(item => item.name === name && item.episode === episode)
+
+               
+               if (!isAlreadyAdded) {
+                  watchlist.push(episodeOBj)
+                  localStorage.setItem('watchlist', JSON.stringify(watchlist))
                }
-               localStorage.setItem('name', JSON.stringify(object))
                
             })
          })

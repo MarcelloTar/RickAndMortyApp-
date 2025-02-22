@@ -108,31 +108,30 @@ if (exampleModal) {
     .then(response => response.json())
     .then(data => {
        console.log(data);
-       let dataEpisode = data.episode;
+      //  let dataEpisode = data.episode;
        
-      //  console.log(dataEpisode);
-      //  console.log(dataEpisode[11].slice(-2));
-      let episodes = [];
-      for (let i = 0; i < dataEpisode.length; i++) {
-         if(dataEpisode[i].length === 41) {
-            episodes.push(' ' + dataEpisode[i].slice(-1));
-         } else if(dataEpisode[i].length === 42){
-            episodes.push(' ' + dataEpisode[i].slice(-2));
-         }
-      }
-      console.log(episodes);
+      // //  console.log(dataEpisode);
+      // //  console.log(dataEpisode[11].slice(-2));
+      // let episodes = [];
+      // for (let i = 0; i < dataEpisode.length; i++) {
+      //    if(dataEpisode[i].length === 41) {
+      //       episodes.push(' ' + dataEpisode[i].slice(-1));
+      //    } else if(dataEpisode[i].length === 42){
+      //       episodes.push(' ' + dataEpisode[i].slice(-2));
+      //    }
+      // }
+      // console.log(episodes);
 
-      let episodesSenEp = [];
-      for (let i = 0; i < episodes.length; i++) {
-         fetch(`https://rickandmortyapi.com/api/episode/${episodes[i]}`)
-          .then(response => response.json())
-          .then(data => {   
-            episodesSenEp.push(data.episode)
-          })     
-       }
-       console.log(episodesSenEp);
+      // let episodesSenEp = [];
+      // for (let i = 0; i < episodes.length; i++) {
+      //    fetch(`https://rickandmortyapi.com/api/episode/${episodes[i]}`)
+      //     .then(response => response.json())
+      //     .then(data => {   
+      //       episodesSenEp.push(data.episode)
+      //     })     
+      //  }
+      //  console.log(episodesSenEp);
        
-         
 
        modalBody.innerHTML= '';
        modalBody.innerHTML = `
@@ -146,10 +145,6 @@ if (exampleModal) {
               <p>Status: ${data.status}</p>
               <p>Origin: ${data.origin.name}</p>
               <p>Location: ${data.location.name}</p>
-               <details class='details'>
-                <summary>In which series did he appear</summary>
-                  <p class='episodes'>${episodesSenEp}</p>
-             </details>
             </div>
             
        `

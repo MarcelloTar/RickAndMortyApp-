@@ -44,7 +44,7 @@ main{
     text-shadow: 1px 1px 2px rgb(97, 252, 92), 0 0 1em rgb(50, 143, 32), 0 0 0.2em rgb(10, 128, 49);
 }
 
-.details{
+/* .details{
     width: max-content;
 } 
 summary{
@@ -52,7 +52,7 @@ summary{
 }
 .details p{
     width: 220px;
-}
+} */
 .form-select{
     background-color: rgb(27, 26, 26);
     color: rgba(21, 250, 0, 0.774);

@@ -1,6 +1,11 @@
 const baseUrl = 'https://rickandmortyapi.com/api/location';
 const container = document.querySelector('.cardBox')
 
+
+let currentPage = 1;
+let currentName = '';
+let currentType = '';
+
 function getLocation(page, name, type) {
     
     fetch(`${baseUrl}/?page=${page}&name=${name}&type=${type}`)
@@ -12,8 +17,8 @@ function getLocation(page, name, type) {
             renderPagination(data.info)
     });
     
-    }
-    getLocation(1, '', '')
+}
+    getLocation(currentPage, currentName, currentType)
 
 function renderCards(data) {
         container.innerHTML = ''
@@ -31,7 +36,6 @@ function renderCards(data) {
         });
 }
 
-let currentPage = 1;
 function renderPagination(info){
    
   const paginationBox = document.querySelector('.pagination');
@@ -57,23 +61,32 @@ function renderPagination(info){
   const prevPage = document.querySelector('.prevPage');
   const nextPage = document.querySelector('.nextPage');
 
-  nextPage.addEventListener('click', () => {
-     currentPage++;
+  if(info.next == null){
+      nextPage.classList.add('disabled')
+  } else {
+      nextPage.addEventListener('click', () => {
+            currentPage++;
+      
+            console.log('next page');
+      
+            getLocation(currentPage, currentName, currentType)
+      })
+  }
 
-     console.log('next page');
+  if(info.prev == null){
+      prevPage.classList.add('disabled')
+   } else{
+      prevPage.addEventListener('click', () => {
+         currentPage--;
+         getLocation(currentPage, currentName, currentType)
+      })
+   }
 
-     getLocation(currentPage, '', '');
-     
-  })
-  prevPage.addEventListener('click', () => {
-     console.log('previous page');
-     if(currentPage > 1){
-        currentPage--;
-        getLocation(currentPage, '', '');
-     }
-     
 
-  })
+
+
+
+  
 }
 
 const btnfilter = document.querySelector('.btnfilter');
@@ -82,14 +95,10 @@ btnfilter.addEventListener('click', function(){
   const name = document.querySelector('.inputName').value;
   const type = document.querySelector('.inputType').value;
   console.log(name, type);
+  currentName = name;
+  currentStatus = type;
   currentPage = 1;
-  if(name === ''){
-   getLocation(currentPage, '', type)
-  } else if(type === ''){
-   getLocation(currentPage, name, '')
-  } else{
-   getLocation(currentPage, name, type)
-   }
+  getLocation(currentPage, currentName, currentType)
 
    
   
@@ -106,32 +115,7 @@ if (exampleModal) {
     .then(response => response.json())
     .then(data => {
        console.log(data);
-       let dataResidents = data.residents;
-       console.log(dataResidents[0], dataResidents[0].length);
        
-       let residents = [];
-       for (let i = 0; i < dataResidents.length; i++) {
-         if(dataResidents[i].length === 43) {
-            residents.push(dataResidents[i].slice(-1));
-         } else if(dataResidents[i].length === 44){
-            residents.push(dataResidents[i].slice(-2));
-         } else if(dataResidents[i].length === 45){
-            residents.push(dataResidents[i].slice(-3));
-         }
-       }
-       console.log(residents);
-      
-       let residentsName = [];
-       
-       for (let i = 0; i < residents.length; i++) {
-         fetch(`https://rickandmortyapi.com/api/character/${residents[i]}`)
-          .then(response => response.json())
-          .then(data => {   
-            residentsName.push(data.name)
-          })     
-       }
-       console.log(residentsName);
-
 
        modalBody.innerHTML= '';
        modalBody.innerHTML = `
@@ -139,10 +123,6 @@ if (exampleModal) {
               <p>Name: ${data.name}</p>
               <p>Type: ${data.type}</p>
               <p>Dimension: ${data.dimension}</p>
-               <details class='details'>
-                <summary>They live there:</summary>
-                  <p>${residentsName}</p>
-             </details>
             </div>
             
        `
