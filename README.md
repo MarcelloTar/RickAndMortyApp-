@@ -1,1 +1,1 @@
-# RickAndMortyApp-
+![foto page](/img/readme/foto.png)

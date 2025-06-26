@@ -4,7 +4,8 @@ body{
 }
 main{
     background: url('/img/rickAndMorty.webp') 0 0/100% auto no-repeat;
-    height: 94.3vh;
+    background-size: cover;
+    height: 94.1vh;
 }
 .navbar-expand-lg, .navbar, .bg-body-tertiary{
     
